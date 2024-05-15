@@ -1,10 +1,11 @@
 const hre = require('hardhat')
 
 async function main() {
-    const CreateExam = await hre.ethers.getContractFactory("CreateExam");
-    const createExam = await CreateExam.deploy();
+    const ce = await hre.ethers.deployContract("CreateExam");
+    await ce.waitForDeployment()
+    console.log(ce)
 
-    console.log("Quiz deployed to:", createExam.address);
+    console.log("Quiz deployed to:", ce.target);
 }
 
 main().then(() => process.exit(0)).catch(error => {
