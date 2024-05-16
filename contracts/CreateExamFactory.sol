@@ -22,8 +22,8 @@ contract CreateExamFactory {
       }));
     }
 
-    function getExamFactory(uint _index) public view returns (ExamFactory memory) {
-        require(_index < examFactories.length, "Test index out of bounds.");
-        return examFactories[_index];
+    function getExamFactory(uint _examFactoryId) public view returns (ExamFactory memory) {
+        require(_examFactoryId < examFactories.length, "Test index out of bounds.");
+        return examFactories[_examFactoryId];
     }
 }
