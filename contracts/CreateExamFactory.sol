@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity ^0.8.0;
 
+import "hardhat/console.sol";
+
 contract CreateExamFactory {
     struct ExamFactory {
         string title;
@@ -10,6 +12,7 @@ contract CreateExamFactory {
     }
 
     event CreatedExamFactory(uint indexed examFactoryId);
+
     ExamFactory[] public examFactories;
 
     function createExamFactory(string memory _title, string memory _description, uint _submitStartTime, uint _submitEndTime) public {
