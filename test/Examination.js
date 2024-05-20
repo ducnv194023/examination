@@ -17,7 +17,7 @@ describe("Examination", function () {
 
         const Examination = await ethers.getContractFactory("Examination");
         const examination = await Examination.deploy(examFactory.target);
-
+        
         const questionHashes = [
             '0x115049a298532be2f181edb03f766770c0db84c22aff39003fec340deaec7545',
             '0x52cb6b5e4a038af1756708f98afb718a08c75b87b2f03dbee4dd9c8139c15c5e',
@@ -54,11 +54,11 @@ describe("Examination", function () {
             const { examination, submitStartTime } = await loadFixture(development);
             
             const answerHashes = [
-                '0x5dd272b4f316b776a7b8e3d0894b37e1e42be3d5d3b204b8a5836cc50597a6b1',
-                '0x4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
-                '0xb27ad06d123c6145fba7e9217a4cfbf2488b4743810ed8c8ff14ad01a5bbe515',
-                '0xa991b89eed28e85e1a7238873f922290111049668c680a68ee15201a611219b3',
-                '0x30f70a6297be831648a8b24d97de3d4bac57aa5b1c22a780cd8dbf68da9966db'
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
             ]
 
             await time.increaseTo(submitStartTime);
@@ -74,11 +74,11 @@ describe("Examination", function () {
             const { examination, submitStartTime } = await loadFixture(development);
             
             const answerHashes = [
-                '0x5dd272b4f316b776a7b8e3d0894b37e1e42be3d5d3b204b8a5836cc50597a6b1',
-                '0x4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
-                '0xb27ad06d123c6145fba7e9217a4cfbf2488b4743810ed8c8ff14ad01a5bbe515',
-                '0xa991b89eed28e85e1a7238873f922290111049668c680a68ee15201a611219b3',
-                '0x30f70a6297be831648a8b24d97de3d4bac57aa5b1c22a780cd8dbf68da9966db'
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
             ]
 
             await time.increaseTo(submitStartTime);
@@ -94,11 +94,11 @@ describe("Examination", function () {
             const { examination, submitStartTime } = await loadFixture(development);
             
             const answerHashes = [
-                '0x5dd272b4f316b776a7b8e3d0894b37e1e42be3d5d3b204b8a5836cc50597a6b1',
-                '0x4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
-                '0xb27ad06d123c6145fba7e9217a4cfbf2488b4743810ed8c8ff14ad01a5bbe515',
-                '0xa991b89eed28e85e1a7238873f922290111049668c680a68ee15201a611219b3',
-                '0x30f70a6297be831648a8b24d97de3d4bac57aa5b1c22a780cd8dbf68da9966db'
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
             ]
 
             await time.increaseTo(submitStartTime+7300);
@@ -113,11 +113,11 @@ describe("Examination", function () {
             const { examination, submitStartTime } = await loadFixture(development);
 
             const answerHashes = [
-                '0x5dd272b4f316b776a7b8e3d0894b37e1e42be3d5d3b204b8a5836cc50597a6b1',
-                '0x4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
-                '0xb27ad06d123c6145fba7e9217a4cfbf2488b4743810ed8c8ff14ad01a5bbe515',
-                '0xa991b89eed28e85e1a7238873f922290111049668c680a68ee15201a611219b3',
-                '0x30f70a6297be831648a8b24d97de3d4bac57aa5b1c22a780cd8dbf68da9966db'
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
             ]
 
             await time.increaseTo(submitStartTime-1000);
@@ -134,14 +134,65 @@ describe("Examination", function () {
             const { examination } = await loadFixture(development);
 
             const answer = [
-                'a',
-                'b',
-                'c',
-                'd',
-                'e'
+                'Paris',
+                '4',
+                'JavaScript',
+                '1912',
+                'Leonardo da Vinci'
             ]
 
             await examination.addRevealAnswer(0, answer);
+        });
+    });
+
+    describe("#verifyCorrectAnswer()", function () {
+        it("Should verify correct answer", async function() {
+            const { examination, submitStartTime } = await loadFixture(development);
+
+            const answerHashes = [
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
+            ]
+
+            await time.increaseTo(submitStartTime);
+            await examination.submitAnswerExam(0, answerHashes)
+
+            const answerSalt = "acce6f1371330a0d29fa5fe62f351351";
+            await examination.verifyCorrectAnswer(answerSalt, 0);
+        });
+
+        it("Should revert if answer is not correct", async function() {
+            const { examination, submitStartTime } = await loadFixture(development);
+
+            const answerHashes = [
+                '0xd9525faee46eb7e9487c3776ffd4cf96d0123d8eb14403fde3fabc4ddaa217bc',
+                '0x9f223518b9b4dd743458fb7b15843da89cd2898210dc10ba292a43e8ff01956f',
+                '0x9e2556b52adf762caafc9ed5ab2576b20fa42fe7085c9c25f36b8849bda673a0',
+                '0xd5602de74af006a8d4aa2bfd1fea113e2db70860b369732f5f14eb438076cb9d',
+                '0x433660e7b20bc0521f797ad4906abae66add18cd21ffb37daca955bf3336692c'
+            ]
+
+            await time.increaseTo(submitStartTime);
+            await examination.submitAnswerExam(0, answerHashes)
+
+            const answer = [
+                'Paris',
+                '4',
+                'JavaScript',
+                '1912',
+                'Leonardo da Vinci'
+            ]
+
+            await examination.addRevealAnswer(0, answer);
+
+            const answerSalt = "acce6f1371330a0d29fa5fe62f351352";
+            await expect(examination.verifyCorrectAnswer(answerSalt, 0))
+            .to
+            .be
+            .revertedWith('Answer is not correct.');
         });
     });
 });

@@ -87,10 +87,12 @@ contract Examination {
         }
     }
 
-    function verifyCorrectAnswer(bytes32 answerSalt, uint _examId) view public {
+    function verifyCorrectAnswer(string memory answerSalt, uint _examId) view public {
         Answer[] memory answers = ownAnswers[msg.sender];
+
         Exam memory exam = exams[_examId];
         RevealAnswer[] memory revealAnswers = exam.revealAnswers;
+
         for (uint i = 0; i < revealAnswers.length; i++) {
             string memory revealAnswer = revealAnswers[i].revealAnswer;
             bytes32 hashRevealAnswer = keccak256(abi.encodePacked(revealAnswer, answerSalt));
