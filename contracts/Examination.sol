@@ -1,107 +1,58 @@
 // SPDX-License-Identifier: MIT 
-pragma solidity ^0.8.0;
-
-import "hardhat/console.sol";
-
-import "./ICreateExamFactory.sol";
+pragma solidity ^0.8.24;
 
 contract Examination {
-    struct Question {
-        bytes32 questionHash;
-    }
-
-    struct Answer {
-        bytes32 answerHash;
-    }
-
-    struct RevealAnswer {
-        string revealAnswer;
-    }
-
     struct Exam {
-        uint examFactoryId;
-        Question[] questions;
-        Answer[] answers;
-        RevealAnswer[] revealAnswers;
+        uint examId;
+        bytes32[] hashQuestions;
+        bytes32[] hashAnswers;
+        string[] revealAnswers;
     }
 
     Exam[] public exams;
 
-    event CreatedExam(uint indexed examId);
+    mapping(address => uint[]) public ownerExams;
 
-    mapping(address => Answer[]) public ownAnswers;
-
-    ICreateExamFactory createExamFactory;
-
-    constructor(address _createExamFactoryAddress) {
-        createExamFactory = ICreateExamFactory(_createExamFactoryAddress);
-    }
-
-    function addQuestionExam(uint _examFactoryId, bytes32[] memory _questionHashes) public {
+    function submitQuestion(bytes32[] memory _hashQuestions, uint _examId) public {
         Exam storage newExam = exams.push();
-        newExam.examFactoryId = _examFactoryId;
-        emit CreatedExam(exams.length - 1);
-
-        for (uint i = 0; i < _questionHashes.length; i++) {
-            newExam.questions.push(Question({
-                questionHash: _questionHashes[i]
-            }));
-        }
-
+        newExam.examId = _examId;
+        newExam.hashQuestions = _hashQuestions;
     }
 
-    function submitAnswerExam(uint _examId, bytes32[] memory _answerHashes) public {
-        Exam storage exam = exams[_examId];
 
-        require(exam.answers.length == 0, "You have already submitted your answers.");
-
-        uint examFactoryId = uint(exam.examFactoryId);
-
-        ICreateExamFactory.ExamFactory memory examFactory = createExamFactory.getExamFactory(examFactoryId);
-
-        uint currentTime = block.timestamp;
-        uint submitEndTime = uint(examFactory.submitEndTime);
-        uint submitStartTime = uint(examFactory.submitStartTime);
-
-        require(currentTime < submitEndTime, "Can not submit anymore.");
-        require(submitStartTime < currentTime , "The exam has not started yet.");
-
-        for (uint i = 0; i < _answerHashes.length; i++) {
-            exam.answers.push(Answer({
-                answerHash: _answerHashes[i]
-            }));
-
-            ownAnswers[msg.sender].push(Answer({
-                answerHash: _answerHashes[i]
-            }));
-        }
+    function submitAnswer(bytes32[] memory _hashAnswers, uint _examId) public {
+        exams[_examId].hashQuestions = _hashAnswers;
+        ownerExams[msg.sender].push(_examId);
     }
 
-    function addRevealAnswer(uint _examId, string[] memory _answers) public {
-        Exam storage exam = exams[_examId];
-
-        for (uint i = 0; i < _answers.length; i++) {
-            exam.revealAnswers.push(RevealAnswer({
-                revealAnswer: _answers[i]
-            }));
+    function revealAnswer(string[] memory _revealAnswers,string[] memory _questions, string memory questionSalt, uint _examId) public {
+        for (uint i = 0; i < _questions.length; i++) {
+            require(keccak256(abi.encodePacked(_questions[i], questionSalt)) == exams[_examId].hashQuestions[i], "You are not allowed to reveal the answer for this question.");
         }
+
+        exams[_examId].revealAnswers = _revealAnswers;
+    }
+
+    function isOwnerExam(address _onwer, uint _examId) view public returns (bool) {
+        uint[] memory answers = ownerExams[_onwer];
+        for (uint i = 0; i < answers.length; i++) {
+            if (answers[i] == _examId) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function verifyCorrectAnswer(string memory answerSalt, uint _examId) view public {
-        Answer[] memory answers = ownAnswers[msg.sender];
-
         Exam memory exam = exams[_examId];
-        RevealAnswer[] memory revealAnswers = exam.revealAnswers;
 
-        for (uint i = 0; i < revealAnswers.length; i++) {
-            string memory revealAnswer = revealAnswers[i].revealAnswer;
-            bytes32 hashRevealAnswer = keccak256(abi.encodePacked(revealAnswer, answerSalt));
-            require(hashRevealAnswer == answers[i].answerHash, "Answer is not correct.");   
+        require(isOwnerExam(msg.sender, _examId), "You are not allowed to reveal the answer for this question.");
+        for (uint i = 0; i < exam.hashAnswers.length; i++) {
+            require(keccak256(abi.encodePacked(exam.revealAnswers[i], answerSalt)) == exam.hashAnswers[i], "The answer is not correct.");
+            // TODO: Implement the logic to reward the user
         }
-    }
 
-    function getExam(uint _examId) public view returns (Exam memory) {
-        require(_examId < exams.length, "Exam index out of bounds.");
-        return exams[_examId];
+
     }
 }
